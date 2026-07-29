@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>Marta ❤️ Igor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init({
+            publicKey: "7dCM-0AJur1ztdDb3",
+            });
+        })();
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        a {
+            color: rgb(167, 90, 230);
+        }
+        select, input, textarea {
+            background-color: #2a2a5c;
+            float: right;
+        }
+        textarea {
+            float: none;
+        }
+        fieldset {
+            padding: 30px;
+        }
+        legend {
+            color: #ff9a9e;
+        }
+        input[type='submit'] {
+            background-color:#ff9a9e;
+            padding: 12px;
+            border-radius: 50px;
+            transition: 0.3s ease;
+            margin-left: 95px;
+            float: left;
+        }
+        input[type='submit']:hover {
+            background-color: #ff6b9d;
+            cursor: pointer;
+        }
+        textarea {
+            min-height: 50px;
+            max-height: 100px;
+            min-width: 100px;
+            max-width: 314px;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #1a1a2e;
+            color: #f5e6f0;
+            min-height: 100vh;
+            padding: 16px 16px 80px;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .heart-float {
+            position: absolute;
+            font-size: 1.6rem;
+            opacity: 0.08;
+            animation: floatHeart 10s infinite linear;
+            user-select: none;
+        }
+        .heart-float:nth-child(1) { left: 5%; animation-duration: 12s; font-size: 2rem; }
+        .heart-float:nth-child(2) { left: 15%; animation-duration: 15s; animation-delay: 1s; }
+        .heart-float:nth-child(3) { left: 25%; animation-duration: 11s; animation-delay: 2s; }
+        .heart-float:nth-child(4) { left: 35%; animation-duration: 14s; animation-delay: 0.5s; }
+        .heart-float:nth-child(5) { left: 45%; animation-duration: 13s; animation-delay: 3s; }
+        .heart-float:nth-child(6) { left: 55%; animation-duration: 16s; animation-delay: 1.5s; }
+        .heart-float:nth-child(7) { left: 65%; animation-duration: 12s; animation-delay: 2.5s; }
+        .heart-float:nth-child(8) { left: 75%; animation-duration: 14s; animation-delay: 0.8s; }
+        .heart-float:nth-child(9) { left: 85%; animation-duration: 11s; animation-delay: 1.2s; }
+        .heart-float:nth-child(10) { left: 92%; animation-duration: 13s; animation-delay: 2s; }
+
+        @keyframes floatHeart {
+            0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.08; }
+            100% { transform: translateY(-120vh) rotate(20deg) scale(0.5); opacity: 0; }
+        }
+
+        .container {
+            max-width: 420px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== KOLORY ===== */
+        :root {
+            --pink: #ff6b9d;
+            --pink-light: #ff9a9e;
+            --pink-glow: rgba(255, 107, 157, 0.3);
+            --bg-card: rgba(30, 30, 60, 0.75);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            --radius: 24px;
+            --font-title: 'Pacifico', cursive;
+        }
+
+        /* ===== KARTY ===== */
+        .card {
+            background: var(--bg-card);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border-radius: var(--radius);
+            padding: 20px 18px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 107, 157, 0.15);
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+            animation: fadeUp 0.6s ease both;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(255, 107, 157, 0.25);
+        }
+        .memory-btn{
+            border:none;
+            background:#2a2a4a;
+            border-radius:18px;
+            overflow:hidden;
+            cursor:pointer;
+            color:white;
+            padding:0;
+        }
+
+        .memory-btn img{
+            width:100%;
+            height:80px;
+            object-fit:cover;
+            display:block;
+        }
+
+        .memory-btn span{
+            display:block;
+            padding:10px;
+        }
+        /* ===== NAGŁÓWEK ===== */
+        .header {
+            text-align: center;
+            padding: 10px 0 6px;
+            animation: fadeUp 0.8s ease both;
+        }
+        .header h1 {
+            font-family: var(--font-title);
+            font-size: 2.8rem;
+            font-weight: 400;
+            background: linear-gradient(135deg, #ff9a9e, #ff6b9d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 1px;
+            text-shadow: 0 0 30px rgba(255, 107, 157, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .header h1 .heart-beat {
+            display: inline-block;
+            animation: heartBeat 1.2s infinite ease-in-out;
+            font-size: 2.6rem;
+            -webkit-text-fill-color: initial;
+            color: #ff6b9d;
+        }
+        .header .sub {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            letter-spacing: 2px;
+            margin-top: -6px;
+        }
+
+        /* ===== LICZNIK ===== */
+        .counter-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 4px 0;
+        }
+        .counter-wrap .days {
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: #ff9a9e;
+            line-height: 1;
+            text-shadow: 0 0 20px rgba(255, 107, 157, 0.3);
+        }
+        .counter-wrap .label {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* ===== POMYSŁY ===== */
+        .idea-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+        .idea-display {
+            background: rgba(255, 107, 157, 0.08);
+            border-radius: 16px;
+            padding: 18px 14px;
+            width: 100%;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 400;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed rgba(255, 107, 157, 0.25);
+            transition: all 0.3s ease;
+            color: #f5e6f0;
+            gap: 10px;
+        }
+        .idea-display .icon {
+            font-size: 2rem;
+        }
+        .btn {
+            background: linear-gradient(135deg, #ff6b9d, #ff4d7a);
+            border: none;
+            border-radius: 40px;
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(255, 107, 157, 0.4);
+            transition: all 0.25s ease;
+            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            touch-action: manipulation;
+        }
+        .btn:active {
+            transform: scale(0.94);
+        }
+        .btn-secondary {
+            background: rgba(255, 107, 157, 0.15);
+            box-shadow: none;
+            border: 1px solid rgba(255, 107, 157, 0.3);
+            color: #ff9a9e;
+        }
+        .btn-secondary:active {
+            background: rgba(255, 107, 157, 0.25);
+        }
+
+        /* ===== CYTAty ===== */
+        .quote-box {
+            text-align: center;
+            font-style: italic;
+            font-size: 1.1rem;
+            padding: 12px 0;
+            position: relative;
+            min-height: 70px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .quote-box .quote-text {
+            transition: opacity 0.3s ease;
+        }
+        .quote-box .quote-author {
+            font-size: 0.85rem;
+            opacity: 0.6;
+            margin-top: 6px;
+            font-style: normal;
+        }
+        .gallery{
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,.92);
+            display:none;
+            justify-content:center;
+            align-items:center;
+            z-index:9999;
+        }
+
+        #galleryImage{
+            max-width:90%;
+            max-height:85%;
+            border-radius:20px;
+            box-shadow:0 0 30px rgba(255,255,255,.2);
+        }
+
+        .arrow{
+            position:absolute;
+            top:50%;
+            transform:translateY(-50%);
+            width:60px;
+            height:60px;
+            border:none;
+            border-radius:50%;
+            background:rgba(255,255,255,.15);
+            color:white;
+            font-size:35px;
+            cursor:pointer;
+            transition:.3s;
+        }
+
+        .arrow:hover{
+            background:rgba(255,255,255,.3);
+        }
+
+        .left{
+            left:25px;
+        }
+
+        .right{
+            right:25px;
+        }
+
+        .closeGallery{
+            position:absolute;
+            top:25px;
+            right:30px;
+            font-size:40px;
+            color:white;
+            cursor:pointer;
+        }
+
+        .memory-btn{
+            aspect-ratio:1;
+            border:none;
+            border-radius:20px;
+            background:linear-gradient(145deg,#2a2a4a,#1d1d38);
+            color:#ff9a9e;
+            font-size:18px;
+            cursor:pointer;
+            transition:.25s;
+        }
+
+        .memory-btn:hover{
+            transform:scale(1.05);
+        }
+
+        /* ===== POWODY ===== */
+        .reasons-list {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0;
+        }
+        .reasons-list li {
+            background: rgba(255, 107, 157, 0.06);
+            padding: 12px 16px;
+            border-radius: 14px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-left: 3px solid #ff6b9d;
+            animation: slideIn 0.4s ease both;
+            font-size: 0.95rem;
+        }
+        .reasons-list li .emoji {
+            font-size: 1.4rem;
+        }
+        
+        .reasons-list li {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        /* ===== WSPOMNIENIA ===== */
+        .memories-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 6px;
+        }
+        .memory-item {
+            aspect-ratio: 1 / 1;
+            border-radius: 18px;
+            background: linear-gradient(145deg, #2a2a4a, #1e1e3a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            box-shadow: inset 0 0 0 1px rgba(255, 107, 157, 0.1);
+            transition: 0.25s ease;
+            color: #ff9a9e;
+            border: 1px solid rgba(255, 107, 157, 0.1);
+            cursor: pointer;
+            user-select: none;
+        }
+        .memory-item:active {
+            transform: scale(0.92);
+        }
+
+        /* ===== STOPKA ===== */
+        .footer {
+            text-align: center;
+            font-size: 0.8rem;
+            opacity: 0.4;
+            padding: 20px 0 4px;
+            letter-spacing: 1px;
+        }
+        .footer .heart {
+            color: #ff6b9d;
+            display: inline-block;
+            animation: heartBeat 1.8s infinite ease-in-out;
+        }
+
+        /* ===== ANIMACJE ===== */
+        @keyframes fadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes heartBeat {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            15% {
+                transform: scale(1.25);
+            }
+            30% {
+                transform: scale(1);
+            }
+            45% {
+                transform: scale(1.2);
+            }
+            60% {
+                transform: scale(1);
+            }
+        }
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-12px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== TŁO Z SERDUSZKAMI (CSS) ===== -->
+    <div class="hearts-bg">
+        <span class="heart-float">❤️</span>
+        <span class="heart-float">❤️</span>
+        <span class="heart-float">❤️</span>
+        <span class="heart-float">❤️</span>
+        <span class="heart-float">❤️</span>
+        <span class="heart-float">❤️</span>
+        <span class="heart-float">❤️</span>
+        <span class="heart-float">❤️</span>
+        <span class="heart-float">❤️</span>
+        <span class="heart-float">❤️</span>
+    </div>
+
+    <div class="container">
+
+        <!-- ===== HEADER ===== -->
+        <header class="header card" style="background:transparent; backdrop-filter:none; box-shadow:none; border:none; padding-bottom:0;">
+            <h1>
+                <span>Marta</span>
+                <span class="heart-beat">❤️</span>
+                <span>Igor</span>
+            </h1>
+            <div class="sub">✨ nasza mała przestrzeń ✨</div>
+        </header>
+
+        <!-- ===== LICZNIK ===== -->
+        <section class="card">
+            <div class="counter-wrap">
+                <span class="days" id="licznikDni">0</span>
+                <span class="label">dni razem ❤️</span>
+            </div>
+            <div style="text-align:center; font-size:0.8rem; opacity:0.5; margin-top:2px;">
+                od 24 listopada 2025
+            </div>
+            <div id="dateDetail" style="text-align:center; font-size:0.9rem; opacity:0.7; margin-top:6px;">
+                <span id="licznikLabel">0 lat, 0 mies. i 0 dni ❤️</span>
+            </div>
+        </section>
+
+        <!-- ===== POMYSŁY NA RANDKe ===== -->
+        <section class="card">
+            <h3 style="font-family:var(--font-title); font-weight:400; font-size:1.6rem; margin-bottom:10px; color:#ff9a9e;">
+                💡 Pomysły na randke
+            </h3>
+            <div class="idea-box">
+                <div class="idea-display" id="ideaDisplay">
+                    <span class="text" id="pomysly">Obejrzenie filmu z jedzonkiem</span>
+                </div>
+                <button class="btn" id="randomIdeaBtn" onclick="pomyslyRandka()">✨ Losuj pomysł ✨</button>
+            </div>
+        </section>
+
+        <!-- ===== CYTA T ===== -->
+        <section class="card">
+            <h3 style="font-family:var(--font-title); font-weight:400; font-size:1.4rem; margin-bottom:6px; color:#ff9a9e;">
+                💌 Cytat dla Ciebie
+            </h3>
+            <div class="quote-box" id="cytatyDiv">
+                <div class="quote-text" id="quoteText">„Miłość to nie patrzenie na siebie, ale patrzenie w tym samym kierunku.”</div>
+                <div class="quote-author" id="quoteAuthor">— Antoine de Saint-Exupéry</div>
+            </div>
+            <button class="btn btn-secondary" id="newQuoteBtn" style="width:100%; justify-content:center; margin-top:6px;" onclick="cytaty()">
+                🔄 Nowy cytat
+            </button>
+        </section>
+
+        <!-- ===== POWODY ===== -->
+        <section class="card">
+            <h3 style="font-family:var(--font-title); font-weight:400; font-size:1.4rem; margin-bottom:4px; color:#ff9a9e;">
+                💖 Kocham Cie, ponieważ...
+            </h3>
+            <ul class="reasons-list" id="reasonsList">
+                <!-- przykładowe elementy (możesz je zastąpić JS) -->
+                <li><span class="emoji">😊</span> masz przeeeeecudowny uśmiech</li>
+                <li><span class="emoji">⛑</span> zawsze mi pomagasz gdy potrzebuje pomocy</li>
+                <li><span class="emoji">👧</span> jesteś pieknaaa i jedyna w swoim rodzaju</li>
+                <li><span class="emoji">💌</span>Oczywiście tych powodów jest znacznie wiecej... <i><a href="./powody.txt">Kliknij tutaj</a></i></li>
+            </ul>
+        </section>
+
+        <!-- ===== WSPOMNIENIA ===== -->
+        <section class="card">
+            <h3 style="font-family:var(--font-title); color:#ff9a9e;">
+                📸 Nasze wspomnienia
+            </h3>
+
+            <div class="memories-grid">
+                <button class="memory-btn" onclick="openGallery('poznan')">
+                    <img src="zdjecia/poznan/1.jpg">
+                    <span style="font-family:var(--font-title); font-weight:400; font-size:0.8rem; margin-bottom:10px; color:#ff9a9e;">🎬 Poznań</span>
+                </button>
+
+                <button class="memory-btn" onclick="openGallery('plaza')">
+                    <img src="zdjecia/plaza/1.jpg">
+                    <span style="font-family:var(--font-title); font-weight:400; font-size:0.8rem; margin-bottom:10px; color:#ff9a9e;">🏖 Plaża</span>
+                </button>
+
+                <button class="memory-btn" onclick="openGallery('wyjsciowo')">
+                    <img src="zdjecia/wyjsciowo/1.jpg">
+                    <span style="font-family:var(--font-title); font-weight:400; font-size:0.8rem; margin-bottom:10px; color:#ff9a9e;">🎈 Wyjściowo</span>
+                </button>
+
+                <button class="memory-btn" onclick="openGallery('walentynki')">
+                    <img src="zdjecia/walentynki/1.jpg">
+                    <span style="font-family:var(--font-title); font-weight:400; font-size:0.8rem; margin-bottom:10px; color:#ff9a9e;">💌 Walentynki</span>
+                </button>
+
+                <button class="memory-btn" onclick="openGallery('walentynkiOut')">
+                    <img src="zdjecia/walentynkiOut/1.jpg">
+                    <span style="font-family:var(--font-title); font-weight:400; font-size:0.8rem; margin-bottom:10px; color:#ff9a9e;">🏙 Walentynki</span>
+                </button>
+
+                <button class="memory-btn" onclick="openGallery('inne')">
+                    <img src="zdjecia/inne/1.jpg">
+                    <span style="font-family:var(--font-title); font-weight:400; font-size:0.8rem; margin-bottom:10px; color:#ff9a9e;">💗 Inne</span>
+                </button>
+
+                <!-- kolejne -->
+            </div>
+            <div style="text-align:center; font-size:0.7rem; opacity:0.4; margin-top:6px;">
+                Dotknij na obrazki, aby przypomnieć sobie nasze najlepsze chwile!
+            </div>
+        </section>
+
+        <!-- ===== SPOTIFY ===== -->
+         <section class="card">
+            <h3 style="font-family:var(--font-title); font-weight:400; font-size:1.4rem; margin-bottom:10px; color:#ff9a9e;">
+                🎵 Piosenka która sie z nami kojarzy
+            </h3>
+            <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/26bju2IkYGvdIYVfaeEfYz?utm_source=generator&theme=0&si=315dd25af25e4aed" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+         </section>
+
+        <!-- ===== MAIL ===== -->
+         <section class="card">
+            <h3 style="font-family:var(--font-title); font-weight:400; font-size:1.4rem; margin-bottom:10px; color:#ff9a9e;">
+                💻 Umów randeczke już dzisiaj!
+            </h3>
+            <form id="form">
+                <fieldset>
+                    <legend style="font-family:var(--font-title); font-weight:200; font-size:1.2rem; margin-bottom:10px; color:#ff9a9e;"> Wypełnij dane </legend>
+                    <label style="font-family:var(--font-title); font-weight:400; font-size:0.9rem; margin-bottom:10px; color:#ff9a9e;">Rodzaj randki</label>
+                    <select name="rodzajRandki" id="rodzajRandki" required style="font-family:var(--font-title); font-weight:400; font-size:0.9rem; margin-bottom:10px; color:#ff9a9e;">
+                        <option value="film">Film + jedzenie</option>
+                        <option value="spacer">Spacer o zachodzie</option>
+                        <option value="gotowanie">Wspólne gotowanie</option>
+                        <option value="planszowki">Planszówki</option>
+                        <option value="piknik">Piknik</option>
+                        <option value="kino">Kino</option>
+                        <option value="kregle">Kregle</option>
+                        <option value="escape">Escape Room</option>
+                        <option value="rowery">Wycieczka rowerowa</option>
+                        <option value="lody">Lody</option>
+                        <option value="gwiazdy">Obserwacja gwiazd</option>
+                        <option value="wycieczka">Mini wycieczka</option>
+                        <option value="karaoke">Karaoke</option>
+                        <option value="pizza">Pieczenie pizzy</option>
+                        <option value="sniadanie">Śniadanie</option>
+                        <option value="malowanie">Malowanie</option>
+                        <option value="trampoliny">Trampoliny</option>
+                        <option value="wspinaczka">Ścianka</option>
+                        <option value="kajaki">Kajaki</option>
+                        <option value="nocnyspacer">Nocny spacer</option>
+                        <option value="foto">Spacer foto</option>
+                        <option value="koncert">Koncert</option>
+                        <option value="wesole">Wesołe miasteczko</option>
+                        <option value="linowy">Park linowy</option>
+                        <option value="minigolf">Mini golf</option>
+                        <option value="bilard">Bilard</option>
+                        <option value="rzutki">Rzutki</option>
+                        <option value="lodowisko">Lodowisko</option>
+                        <option value="basen">Basen</option>
+                        <option value="taniec">Nauka tańca</option>
+                        <option value="pociag">Wycieczka pociągiem</option>
+                        <option value="puzzle">Puzzle</option>
+                        <option value="ksiazki">Czytanie książek</option>
+                        <option value="wieczorfilm">Wieczór filmowy</option>
+                        <option value="fort">Fort z poduszek</option>
+                        <option value="urbex">Urbex</option>
+                        <option value="gry">Turniej gier</option>
+                        <option value="inne">Inne</option>
+                    </select>
+                    <br><br>
+                    <label style="font-family:var(--font-title); font-weight:400; font-size:0.9rem; margin-bottom:10px; color:#ff9a9e;">Data</label><input type="date" name="data" id="data" required style="font-family:var(--font-title); font-weight:400; font-size:0.9rem; margin-bottom:10px; color:#ff9a9e;"><br><br>
+                    <label style="font-family:var(--font-title); font-weight:400; font-size:0.9rem; margin-bottom:10px; color:#ff9a9e;">Godzina</label><input type="time" name="godzina" min="00:00" max="23:59" value="00:00" required style="font-family:var(--font-title); font-weight:400; font-size:0.9 rem; margin-bottom:10px; color:#ff9a9e;"><br><br>
+                    <label style="font-family:var(--font-title); font-weight:400; font-size:0.9rem; margin-bottom:10px; color:#ff9a9e;">Komentarz</label><br><br>
+                    <textarea name="komentarz" id="komentarz" style="font-family:var(--font-title); font-weight:100; font-size:1.3rem; margin-bottom:10px; color:#ff9a9e;" required></textarea><br><br>
+                    <input type="submit" value="Umów randeczke!">
+                </fieldset>
+            </form>
+         </section>
+        <div id="gallery" class="gallery">
+
+            <button class="arrow left" onclick="prevPhoto()">❮</button>
+
+            <img id="galleryImage">
+
+            <button class="arrow right" onclick="nextPhoto()">❯</button>
+
+            <span class="closeGallery" onclick="closeGallery()">✖</span>
+
+        </div>
+        <!-- ===== STOPKA ===== -->
+        <div class="footer">
+            z <span class="heart">❤️</span> dla Martusiii
+        </div>
+
+    </div>
+    <script>
+        document.getElementById('form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const serviceID = 'service_yn14x2n';
+            const templateID = 'template_f72j6z7';
+
+            emailjs.sendForm(serviceID, templateID, this)
+                .then(() => {
+                    alert('Wiadomość została wysłana!');
+                }, (error) => {
+                    alert('Błąd podczas wysyłania: ' + JSON.stringify(error));
+                });
+        });
+    </script>
+
+    <script src="skrypcik.js"></script>
+
+</body>
+</html>
