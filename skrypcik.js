@@ -80,7 +80,7 @@ function pomyslyRandka() {
         'Siłownia',
         'Netflix & chill'
     ]   
-    let losowanie = Math.floor(Math.random()*40)
+    let losowanie = Math.floor(Math.random()*41)
     pomysl.innerText = pomysly[losowanie]
 }
 
