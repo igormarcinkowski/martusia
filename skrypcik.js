@@ -77,7 +77,8 @@ function pomyslyRandka() {
         'Turniej w gry komputerowe',
         'Maczek',
         'Nauka języków',
-        'Siłownia'
+        'Siłownia',
+        'Netflix & chill'
     ]   
     let losowanie = Math.floor(Math.random()*40)
     pomysl.innerText = pomysly[losowanie]
